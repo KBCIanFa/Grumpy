@@ -1,5 +1,3 @@
-# Grumpy
-
 # 😤 The Grumpy Old Man Course
 
 > *Australia's Premier Educational Institution for Advanced Whinging & Certified Curmudgeonry*
