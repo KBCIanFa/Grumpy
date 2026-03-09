@@ -243,7 +243,7 @@ footer strong{color:var(--ink);}
       </div>
       <aside class="prog-box">
         <span class="prog-num" id="completed-count">0</span>
-        <div style="opacity:0.6;font-size:0.7rem;margin-top:-0.15rem;">of <span id="total-count">10</span> modules mastered</div>
+        <div style="opacity:0.6;font-size:0.7rem;margin-top:-0.15rem;">of <span id="total-count">12</span> modules mastered</div>
         <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
         <div id="grump-badge" class="grump-badge">Apprentice Grump</div>
         <hr class="div" style="border-color:rgba(255,255,255,0.15);"/>
@@ -322,6 +322,8 @@ footer strong{color:var(--ink);}
           <option value="supermarkets">Supermarkets &amp; queues</option>
           <option value="technology">Technology &amp; gadgets</option>
           <option value="weather">Weather &amp; power bills</option>
+          <option value="trump">Bloody Donald Trump</option>
+          <option value="fuel">Bloody Fuel Prices</option>
         </select>
         <button class="ink-btn" id="rant-gen-btn" style="margin-top:0.55rem;">Give Me a Starter Line</button>
         <div class="rout vis" id="rant-out" style="font-family:'Special Elite',monospace;font-size:0.8rem;">Pick a topic and I'll tee you up.</div>
@@ -467,7 +469,9 @@ const topics=[
   {id:"technology-gadgets",       title:"Technology & Gadgets",           desc:"Complain about technology while relying on it for absolutely everything.",                             sample:"We had one button and it worked. Now there are fifty and none of them do what I want."},
   {id:"traditions-back-in-my-day",title:"Traditions & Back in My Day",   desc:"Weaponise nostalgia for maximum storytelling impact.",                                                  sample:"Back in my day we fixed things instead of throwing them out every five minutes."},
   {id:"weather-small-talk",       title:"Weather & Small Talk",           desc:"Turn harmless chat about the weather into a comprehensive economic critique.",                         sample:"Hot again? Power company's loving this, I can tell you right now."},
-  {id:"modern-manners-etiquette", title:"Modern Manners & Etiquette",     desc:"Become the self-appointed sheriff of common sense and basic decency.",                                sample:"It's not that hard to say please and thank you, but apparently that's optional now."}
+  {id:"modern-manners-etiquette", title:"Modern Manners & Etiquette",     desc:"Become the self-appointed sheriff of common sense and basic decency.",                                sample:"It's not that hard to say please and thank you, but apparently that's optional now."},
+  {id:"bloody-donald-trump",      title:"Bloody Donald Trump",            desc:"Master the art of the exasperated international commentary — because apparently the whole world has to have an opinion now.",  sample:"I don't care which side you're on, mate. When a bloke in a suit affects the price of my cornflakes, I'm allowed to be annoyed."},
+  {id:"bloody-fuel-prices",       title:"Bloody Fuel Prices",             desc:"Channel the ancient Aussie rage of pulling up to the bowser, squinting at the price board, and audibly swearing.",          sample:"Two dollars and nine cents a litre. TWO. DOLLARS. AND. NINE. CENTS. I need a moment."}
 ];
 
 const starters={
@@ -478,7 +482,9 @@ const starters={
   traffic:["Indicators are not optional decorations, champion. They're a legal requirement.","If you're doing 70 in the right lane, we need to have a serious conversation.","I didn't realise the speed limit was 'whichever number you feel in your heart today.'","Tailgating me isn't going to make the lights change faster, sport."],
   supermarkets:["Of course they open one checkout when there are thirty people waiting.","Self-checkout again. Apparently I work here now. Unpaid. On my day off.","Nothing says 'special' like jacking the price up first, then marking it down.","I've been standing here so long I could have grown the vegetables myself."],
   technology:["We had one button and it worked. Now there are fifty and none of them do what I want.","They updated it again. Fixed everything that wasn't broken and broke everything that was.","I don't need the app to connect me to my fridge. I know where the fridge is.","Back in my day software came on a disc and stayed where you put it."],
-  weather:["Hot again? Power company's absolutely loving this, I can tell you right now.","They forecast rain for three days and then act surprised when it doesn't.","This kind of weather is why power bills are what they are. Connect the dots.","Either too hot, too cold, or too windy. But sure, enjoy the long weekend."]
+  weather:["Hot again? Power company's absolutely loving this, I can tell you right now.","They forecast rain for three days and then act surprised when it doesn't.","This kind of weather is why power bills are what they are. Connect the dots.","Either too hot, too cold, or too windy. But sure, enjoy the long weekend."],
+  trump:["Look, I don't care what your politics are — when one bloke in a funny tie affects my grocery bill from twelve thousand kilometres away, something's gone wrong.","I turned on the news and apparently the whole world is now run by Twitter posts. We used to have diplomats for this sort of thing.","I'm not saying anything political. I'm just saying that when a retired real-estate bloke in America makes my petrol more expensive, I'm entitled to an opinion.","Back in my day, American presidents were an American problem. Now apparently they're everyone's problem, including mine, on a Tuesday morning in Queensland."],
+  fuel:["Two dollars and nine cents a litre. TWO. DOLLARS. AND. NINE. CENTS. I need a moment.","I pulled up to the bowser, saw the price, and briefly considered just leaving the car there permanently.","They dropped it three cents last Tuesday. Three. Cents. And acted like they'd done us a favour.","I remember when you could fill the tank and still have change for a meat pie. That's not nostalgia, that's grief."]
 };
 
 /* ══ AI CONFIG ══ */
@@ -616,8 +622,8 @@ document.getElementById("rate-btn")?.addEventListener("click",async()=>{
 });
 
 /* ══ WHEEL ══ */
-const WT=["Bins & Neighbours","Kids These Days","Prices Gone Mad","Government","Bad Drivers","Supermarkets","Tech Changes","Good Old Days","Weather Bills","Manners!"];
-const WC=["#c0392b","#2c3e50","#8b2820","#1a2b5e","#7b321a","#2c3e50","#c0392b","#8b2820","#1a2b5e","#7b321a"];
+const WT=["Bins & Neighbours","Kids These Days","Prices Gone Mad","Government","Bad Drivers","Supermarkets","Tech Changes","Good Old Days","Weather Bills","Manners!","Bloody Trump","Bloody Fuel"];
+const WC=["#c0392b","#2c3e50","#8b2820","#1a2b5e","#7b321a","#2c3e50","#c0392b","#8b2820","#1a2b5e","#7b321a","#c0392b","#8b2820"];
 let wAngle=0,wSpin=false;
 
 function drawWheel(){
@@ -693,7 +699,7 @@ document.getElementById("polite-offline-btn")?.addEventListener("click",()=>{
 });
 
 /* ══ BINGO ══ */
-const BW=["Back in my day","They don't make 'em like","Too many cooks","Cost of living","Bloody government","Kids on phones","In the old days","Weather's gone mad","Not like they used to","Queue jumper","Service is terrible","Red tape","Common sense","Changed it again","It's not right","Prices gone up","Can't trust anyone","Nobody listens","Parking nightmare","Where's the manager","Used to be a dollar","Before my time","Don't get me started","Someone should complain","Paperwork for everything","Can't do anything","It's political","No respect anymore","Tradies!","Health & safety mad","What happened to cash","Six weeks to fix that","Back to basics","Not in my street","Too many forms"];
+const BW=["Back in my day","They don't make 'em like","Too many cooks","Cost of living","Bloody government","Kids on phones","In the old days","Weather's gone mad","Not like they used to","Queue jumper","Service is terrible","Red tape","Common sense","Changed it again","It's not right","Prices gone up","Can't trust anyone","Nobody listens","Parking nightmare","Where's the manager","Used to be a dollar","Before my time","Don't get me started","Someone should complain","Paperwork for everything","Can't do anything","It's political","No respect anymore","Tradies!","Health & safety mad","What happened to cash","Six weeks to fix that","Back to basics","Not in my street","Too many forms","Bloody Trump","Fuel prices!","Two bucks a litre","It's all Trump's fault","Tariffs, don't start me"];
 function buildBingo(){
   const grid=document.getElementById("bingo-grid"),msg=document.getElementById("bingo-msg");
   if(!grid)return;if(msg)msg.textContent="";
